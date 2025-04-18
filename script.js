@@ -4,6 +4,30 @@ const speedButton = document.querySelector('.speed');
 const background = document.querySelector('.background');
 const hasina = document.querySelector('.hasina');
 
+function isMobile() {
+    return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+  
+  function checkOrientation() {
+    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+    const warning = document.getElementById("rotate-warning");
+  
+    if (isMobile() && isPortrait) {
+      warning.style.display = "flex";
+    } else {
+      if (warning.style.display === "flex") {
+        location.reload(); // Refresh on rotate to landscape
+      }
+      warning.style.display = "none";
+    }
+}
+  
+window.addEventListener("load", checkOrientation);
+window.addEventListener("orientationchange", () => {
+    setTimeout(checkOrientation, 300); // Small delay for device to update orientation
+});
+  
+
 let a = 20;
 let s = 6;
 let drainInterval = null;
@@ -50,7 +74,7 @@ function staminaFuc() {
 // Stamina recover function
 function boost() {
     if (s < 6) {
-        s = s + 0.1;
+        s = s + 0.2;
         stamina.style.width = `${s}vw`;
     } else {
         clearInterval(boostInterval);
