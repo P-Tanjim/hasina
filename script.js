@@ -7,6 +7,17 @@ const rotate = document.querySelector('#rotate-warning');
 const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
 
+window.onload = function () {
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
+    }
+};
 
 let a = 20;
 let s = 6;
@@ -16,6 +27,7 @@ let jumpAnimation = true;
 let downAnimation = true;
 let bgPosition = 0;
 let bgSpeed = 0.2; // normal speed
+let isSprinting = false;
 
 // Move character
 function khaledaRun() {
@@ -26,47 +38,36 @@ function khaledaRun() {
 }
 setInterval(khaledaRun, 100);
 
-// jump animation
-
-jump.addEventListener("click", () =>{
-    jumping();
-})
-
-function jumping (event) {
-    if(jumpAnimation === true){
+// Jump animation
+function jumping() {
+    if (jumpAnimation === true) {
         hasina.classList.add("hasina-jump");
         jumpAnimation = setInterval(jumpAgain, 1000);
     }
 }
 
-function jumpAgain (){
+function jumpAgain() {
     hasina.classList.remove("hasina-jump");
     clearInterval(jumpAnimation);
     jumpAnimation = true;
 }
 
-// down animation
-
-down.addEventListener("click", () =>{
-    downing();
-})
-
-function downing () {
-    if(downAnimation === true){
+// Down animation
+function downing() {
+    if (downAnimation === true) {
         hasina.classList.add("hasina-down");
         downAnimation = setInterval(downAgain, 1000);
     }
 }
 
-function downAgain (){
+function downAgain() {
     hasina.classList.remove("hasina-down");
     clearInterval(downAnimation);
     downAnimation = true;
 }
 
-// jump down keyboard
-
-document.addEventListener("keydown", function(event) {
+// Keyboard control for jump/down
+document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
         jumping();
     } else if (event.key === "ArrowDown") {
@@ -74,22 +75,20 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
-
-// Animate background with smooth control
+// Animate background
 function animateBackground() {
-    bgPosition -= bgSpeed; // Move the background left
+    bgPosition -= bgSpeed;
 
-    // When background reaches the end, reset its position to start
     if (bgPosition <= -100) {
         bgPosition = 0;
     }
 
     background.style.transform = `translateX(${bgPosition}vw)`;
-    requestAnimationFrame(animateBackground); // Repeat the animation
+    requestAnimationFrame(animateBackground);
 }
 animateBackground();
 
-// Stamina drain function
+// Stamina drain
 function staminaFuc() {
     if (s > 0) {
         s = s - 0.3;
@@ -97,12 +96,12 @@ function staminaFuc() {
     } else {
         clearInterval(drainInterval);
         drainInterval = null;
-        bgSpeed = 0.2; // revert to normal speed
+        bgSpeed = 0.2;
         startBoost();
     }
 }
 
-// Stamina recover function
+// Stamina boost
 function boost() {
     if (s < 6) {
         s = s + 0.2;
@@ -118,79 +117,64 @@ function startBoost() {
         boostInterval = setInterval(boost, 100);
     }
 }
+
 // Start sprint
 function startSpeed(event) {
-    if (event.key === "ArrowRight" || event.keyCode === 39) {
-        if (drainInterval == null && s > 0) {
-            clearInterval(boostInterval);
-            boostInterval = null;
+    event.preventDefault(); // prevent mobile touch conflict
 
-            drainInterval = setInterval(staminaFuc, 100);
-            bgSpeed = 1; // fast speed
-        }
-        hasina.style.left = `5%`;
-    }
-}
-
-// Stop sprint
-function stopSpeed(event) {
-    if (event.key === "ArrowRight" || event.keyCode === 39) {
-        clearInterval(drainInterval);
-        drainInterval = null;
-        bgSpeed = 0.2; // normal speed
-        hasina.style.left = `2%`;
-        startBoost();
-    }
-}
-
-// Button events (mouse + touch)
-// Start sprint
-function startSpeed(event) {
-    if (event.key === "ArrowRight" || event.keyCode === 39) {
-        if (drainInterval == null && s > 0) {
-            clearInterval(boostInterval);
-            boostInterval = null;
-
-            drainInterval = setInterval(staminaFuc, 100);
-            bgSpeed = 1; // fast speed
-        }
-        hasina.style.left = `5%`;
-    }
-}
-
-// Stop sprint
-function stopSpeed(event) {
-    if (event.key === "ArrowRight" || event.keyCode === 39) {
-        clearInterval(drainInterval);
-        drainInterval = null;
-        bgSpeed = 0.2; // normal speed
-        hasina.style.left = `2%`;
-        startBoost();
-    }
-}
-
-function startSpeedPc() {
-    if (drainInterval == null && s > 0) {
+    if (!isSprinting && s > 0) {
+        isSprinting = true;
         clearInterval(boostInterval);
         boostInterval = null;
 
         drainInterval = setInterval(staminaFuc, 100);
-        bgSpeed = 1; // fast speed
-        hasina.style.left = `5%`;
+        bgSpeed = 1;
     }
+    hasina.style.left = `5%`;
 }
 
 // Stop sprint
-function stopSpeedPc() {
+function stopSpeed(event) {
+    event.preventDefault(); // prevent mobile touch conflict
+
+    isSprinting = false;
     clearInterval(drainInterval);
     drainInterval = null;
-    bgSpeed = 0.2; // normal speed
+    bgSpeed = 0.2;
     hasina.style.left = `2%`;
     startBoost();
 }
-document.addEventListener('keydown', startSpeed);
-document.addEventListener('keyup', stopSpeed);
-speedButton.addEventListener('mousedown', startSpeedPc);
-speedButton.addEventListener('mouseup', stopSpeedPc);
-speedButton.addEventListener('touchstart', startSpeedPc);
-speedButton.addEventListener('touchend', stopSpeedPc);
+
+// Speed button events
+document.addEventListener('keydown', function (event) {
+    if (event.key === "ArrowRight" || event.keyCode === 39) {
+        startSpeed(event);
+    }
+});
+document.addEventListener('keyup', function (event) {
+    if (event.key === "ArrowRight" || event.keyCode === 39) {
+        stopSpeed(event);
+    }
+});
+
+// Touch/mouse for speed button
+speedButton.addEventListener('mousedown', startSpeed);
+speedButton.addEventListener('mouseup', stopSpeed);
+speedButton.addEventListener('touchstart', startSpeed);
+speedButton.addEventListener('touchend', stopSpeed);
+
+// Touch and click for jump/down buttons
+jump.addEventListener("click", () => {
+    jumping();
+});
+down.addEventListener("click", () => {
+    downing();
+});
+jump.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    jumping();
+});
+down.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    downing();
+});
