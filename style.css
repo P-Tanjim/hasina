@@ -149,11 +149,11 @@ body {
 /* Controls */
 .speed {
   border: none;
-  height: 18vh;
+  height: 15vh;
   width: 9vw;
   position: absolute;
   top: 65%;
-  left: 7%;
+  left: 9%;
   z-index: 5;
 }
 
@@ -168,12 +168,12 @@ body {
 .up-down {
   position: absolute;
   top: 50%;
-  right: 10%;
-  height: 20vh;
-  width: 7vw;
+  right: 8%;
+  height: 15vh;
+  width: 9vw;
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 5vh;
   z-index: 9999;
 }
 
@@ -186,8 +186,8 @@ body {
 
 .up,
 .down {
-  height: 15vh;
-  width: 7vw;
+  height: 100%;
+  width: 100%;
   object-fit: cover;
   pointer-events: none;
   user-select: none;  
