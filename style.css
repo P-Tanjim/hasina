@@ -17,6 +17,8 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 
 #rotate-warning img {
