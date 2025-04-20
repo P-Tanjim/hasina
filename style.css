@@ -51,6 +51,7 @@ body {
   user-select: none;
   z-index: 1;
   transform: translateX(0);
+  will-change: transform;
 }
 
 .background img {
