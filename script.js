@@ -7,16 +7,20 @@ const rotate = document.querySelector('#rotate-warning');
 const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
 
-function checkOrientation() {
-  const warning = document.getElementById("rotate-warning");
-  if (window.innerHeight > window.innerWidth) {
-    // Portrait mode
-    warning.style.display = "flex";
-  } else {
-    // Landscape mode
-    warning.style.display = "none";
+
+let lastTap = 0;
+document.getElementById("rotate-warning").addEventListener("touchend", function (e) {
+  let currentTime = new Date().getTime();
+  let tapLength = currentTime - lastTap;
+  if (tapLength < 300 && tapLength > 0) {
+    if (window.innerWidth > window.innerHeight) {
+      // In landscape, hide the warning
+      document.getElementById("rotate-warning").style.display = "none";
+    }
   }
-}
+  lastTap = currentTime;
+});
+
 
 // Check on load
 window.addEventListener("load", checkOrientation);
