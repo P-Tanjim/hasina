@@ -9,26 +9,17 @@ const down = document.querySelector('.down-controler');
 
 
 let lastTap = 0;
+
 document.getElementById("rotate-warning").addEventListener("touchend", function (e) {
   let currentTime = new Date().getTime();
   let tapLength = currentTime - lastTap;
   if (tapLength < 300 && tapLength > 0) {
     if (window.innerWidth > window.innerHeight) {
-      // In landscape, hide the warning
-      document.getElementById("rotate-warning").style.display = "none";
+      location.reload(); // Restart the game
     }
   }
   lastTap = currentTime;
 });
-
-
-// Check on load
-window.addEventListener("load", checkOrientation);
-
-// Check on resize or orientation change
-window.addEventListener("resize", checkOrientation);
-window.addEventListener("orientationchange", checkOrientation);
-
 
 let a = 20;
 let s = 6;
