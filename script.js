@@ -7,7 +7,6 @@ const rotate = document.querySelector('#rotate-warning');
 const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
 
-
 let a = 20;
 let s = 6;
 let drainInterval = null;
@@ -15,7 +14,7 @@ let boostInterval = null;
 let jumpAnimation = true;
 let downAnimation = true;
 let bgPosition = 0;
-let bgSpeed = 0.2; // normal speed
+let bgSpeed = 0.2;
 let isSprinting = false;
 
 // Move character
@@ -55,7 +54,7 @@ function downAgain() {
     downAnimation = true;
 }
 
-// Keyboard control for jump/down
+// Keyboard controls
 document.addEventListener("keydown", function (event) {
     if (event.key === "ArrowUp") {
         jumping();
@@ -64,25 +63,17 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-// Animate background
-const bg1 = document.querySelector('.bg1');
-const bg2 = document.querySelector('.bg2');
-let bgX1 = 0;
-let bgX2 = 100;
-
+// Animate background smoothly
 function animateBackground() {
-    bgX1 -= bgSpeed;
-    bgX2 -= bgSpeed;
-
-    // When one image is fully off-screen, reset its position
-    if (bgX1 <= -100) bgX1 = 100;
-    if (bgX2 <= -100) bgX2 = 100;
-
-    bg1.style.transform = `translateX(${bgX1}vw)`;
-    bg2.style.transform = `translateX(${bgX2}vw)`;
-
+    bgPosition -= bgSpeed;
+    if (bgPosition <= -100) {
+        bgPosition = 0;
+    }
+    background.style.transform = `translateX(${bgPosition}vw)`;
     requestAnimationFrame(animateBackground);
 }
+animateBackground();
+
 // Stamina drain
 function staminaFuc() {
     if (s > 0) {
@@ -113,25 +104,22 @@ function startBoost() {
     }
 }
 
-// Start sprint
+// Sprinting
 function startSpeed(event) {
-    event.preventDefault(); // prevent mobile touch conflict
+    event.preventDefault();
 
     if (!isSprinting && s > 0) {
         isSprinting = true;
         clearInterval(boostInterval);
         boostInterval = null;
-
         drainInterval = setInterval(staminaFuc, 100);
         bgSpeed = 1;
     }
     hasina.style.left = `5%`;
 }
 
-// Stop sprint
 function stopSpeed(event) {
-    event.preventDefault(); // prevent mobile touch conflict
-
+    event.preventDefault();
     isSprinting = false;
     clearInterval(drainInterval);
     drainInterval = null;
@@ -151,20 +139,14 @@ document.addEventListener('keyup', function (event) {
         stopSpeed(event);
     }
 });
-
-// Touch/mouse for speed button
 speedButton.addEventListener('mousedown', startSpeed);
 speedButton.addEventListener('mouseup', stopSpeed);
 speedButton.addEventListener('touchstart', startSpeed);
 speedButton.addEventListener('touchend', stopSpeed);
 
-// Touch and click for jump/down buttons
-jump.addEventListener("click", () => {
-    jumping();
-});
-down.addEventListener("click", () => {
-    downing();
-});
+// Jump/down buttons
+jump.addEventListener("click", jumping);
+down.addEventListener("click", downing);
 jump.addEventListener('touchstart', (e) => {
     e.preventDefault();
     jumping();
@@ -174,11 +156,9 @@ down.addEventListener('touchstart', (e) => {
     downing();
 });
 
-
-
+// Fullscreen toggle
 function requestFullscreen() {
     const elem = document.documentElement;
-
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
@@ -189,8 +169,6 @@ function requestFullscreen() {
         elem.msRequestFullscreen();
     }
 }
-
-// Double tap / double click support
 let lastTap = 0;
 window.addEventListener('touchend', function (e) {
     const currentTime = new Date().getTime();
@@ -200,8 +178,6 @@ window.addEventListener('touchend', function (e) {
     }
     lastTap = currentTime;
 });
-
 window.addEventListener('dblclick', function () {
     requestFullscreen();
 });
-
