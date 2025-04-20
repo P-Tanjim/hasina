@@ -24,9 +24,15 @@ body {
   height: auto;
 }
 
-@media (max-width: 767px) {
+@media screen and (orientation: portrait) {
   #rotate-warning {
     display: flex;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  #rotate-warning {
+    display: none;
   }
 }
 
