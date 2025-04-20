@@ -8,18 +8,21 @@ const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
 
 
-let lastTap = 0;
-
-document.getElementById("rotate-warning").addEventListener("touchend", function (e) {
-  let currentTime = new Date().getTime();
-  let tapLength = currentTime - lastTap;
-  if (tapLength < 300 && tapLength > 0) {
-    if (window.innerWidth > window.innerHeight) {
-      location.reload(); // Restart the game
-    }
+function checkOrientation() {
+  const rotateWarning = document.getElementById("rotate-warning");
+  if (window.innerHeight > window.innerWidth) {
+    rotateWarning.style.display = "flex";
+  } else {
+    rotateWarning.style.display = "none";
   }
-  lastTap = currentTime;
-});
+}
+
+// Check on load
+window.addEventListener("load", checkOrientation);
+
+// Check when screen size or orientation changes
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("orientationchange", checkOrientation);
 
 let a = 20;
 let s = 6;
