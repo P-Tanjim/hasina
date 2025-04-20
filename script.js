@@ -7,6 +7,25 @@ const rotate = document.querySelector('#rotate-warning');
 const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
 
+function checkOrientation() {
+  const warning = document.getElementById("rotate-warning");
+  if (window.innerHeight > window.innerWidth) {
+    // Portrait mode
+    warning.style.display = "flex";
+  } else {
+    // Landscape mode
+    warning.style.display = "none";
+  }
+}
+
+// Check on load
+window.addEventListener("load", checkOrientation);
+
+// Check on resize or orientation change
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("orientationchange", checkOrientation);
+
+
 let a = 20;
 let s = 6;
 let drainInterval = null;
