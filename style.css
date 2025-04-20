@@ -38,7 +38,7 @@ body {
   overflow: hidden;
 }
 
-/* Background */
+/* Background 
 .background {
   width: 200vw;
   height: 100vh;
@@ -58,7 +58,22 @@ body {
   height: 100vh;
   object-fit: cover;
 }
+*/
+.background-box {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+}
 
+.bgimg {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
 /* Ground */
 .ground-box {
   position: absolute;
