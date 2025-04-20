@@ -14,7 +14,7 @@ let boostInterval = null;
 let jumpAnimation = true;
 let downAnimation = true;
 let bgPosition = 0;
-let bgSpeed = 0.2;
+// let bgSpeed = 0.2;
 let isSprinting = false;
 
 // Move character
@@ -64,14 +64,18 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Animate background smoothly
+let bgX = 0;
+let bgSpeed = 0.2;
+
 function animateBackground() {
-    bgPosition -= bgSpeed;
-    if (bgPosition <= -100) {
-        bgPosition = 0;
-    }
-    background.style.transform = `translateX(${bgPosition}vw)`;
-    requestAnimationFrame(animateBackground);
+  bgX -= bgSpeed;
+  if (bgX <= -100) {
+    bgX = 0;
+  }
+  background.style.transform = `translateX(${bgX}vw)`;
+  requestAnimationFrame(animateBackground);
 }
+
 animateBackground();
 
 // Stamina drain
