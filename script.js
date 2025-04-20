@@ -14,7 +14,7 @@ let drainInterval = null;
 let boostInterval = null;
 let jumpAnimation = true;
 let downAnimation = true;
-// let bgPosition = 0;
+let bgPosition = 0;
 let bgSpeed = 0.2; // normal speed
 let isSprinting = false;
 
@@ -65,16 +65,19 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Animate background
-let bgX = 0;
-
 function animateBackground() {
-    bgX -= bgSpeed;
-    if (bgX <= -100) {
-        bgX = 0;
+    bgPosition -= bgSpeed;
+    background.style.transform = `translateX(${bgPosition}vw)`;
+
+    // If the background has moved full width, reset by +100vw
+    if (bgPosition <= -100) {
+        bgPosition += 100;
     }
-    background.style.transform = `translateX(${bgX}vw)`;
+
     requestAnimationFrame(animateBackground);
 }
+
+animateBackground();
 // Stamina drain
 function staminaFuc() {
     if (s > 0) {
