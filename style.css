@@ -24,19 +24,6 @@ body {
   height: auto;
 }
 
-@media screen and (orientation: portrait) {
-  #rotate-warning {
-    display: flex;
-  }
-}
-
-@media screen and (orientation: landscape) {
-  #rotate-warning {
-    display: none;
-  }
-}
-
-
 .game-container {
   position: relative;
   width: 100vw;
