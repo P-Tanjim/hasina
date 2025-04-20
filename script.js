@@ -64,15 +64,27 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Animate background smoothly
-let bgX = 0;
+const bg1 = document.querySelector('.bg1');
+const bg2 = document.querySelector('.bg2');
+
+let bg1X = 0;
+let bg2X = 100;
 let bgSpeed = 0.2;
 
 function animateBackground() {
-  bgX -= bgSpeed;
-  if (bgX <= -100) {
-    bgX = 0;
+  bg1X -= bgSpeed;
+  bg2X -= bgSpeed;
+
+  if (bg1X <= -100) {
+    bg1X = bg2X + 100;
   }
-  background.style.transform = `translateX(${bgX}vw)`;
+  if (bg2X <= -100) {
+    bg2X = bg1X + 100;
+  }
+
+  bg1.style.transform = `translateX(${bg1X}vw)`;
+  bg2.style.transform = `translateX(${bg2X}vw)`;
+
   requestAnimationFrame(animateBackground);
 }
 
