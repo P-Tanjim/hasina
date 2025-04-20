@@ -65,19 +65,24 @@ document.addEventListener("keydown", function (event) {
 });
 
 // Animate background
-function animateBackground() {
-    bgPosition -= bgSpeed;
-    background.style.transform = `translateX(${bgPosition}vw)`;
+const bg1 = document.querySelector('.bg1');
+const bg2 = document.querySelector('.bg2');
+let bgX1 = 0;
+let bgX2 = 100;
 
-    // If the background has moved full width, reset by +100vw
-    if (bgPosition <= -100) {
-        bgPosition += 100;
-    }
+function animateBackground() {
+    bgX1 -= bgSpeed;
+    bgX2 -= bgSpeed;
+
+    // When one image is fully off-screen, reset its position
+    if (bgX1 <= -100) bgX1 = 100;
+    if (bgX2 <= -100) bgX2 = 100;
+
+    bg1.style.transform = `translateX(${bgX1}vw)`;
+    bg2.style.transform = `translateX(${bgX2}vw)`;
 
     requestAnimationFrame(animateBackground);
 }
-
-animateBackground();
 // Stamina drain
 function staminaFuc() {
     if (s > 0) {
