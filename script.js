@@ -115,39 +115,39 @@ function animateBackground() {
 animateBackground();
 
 // Stamina
-function drainStamina() {
-  if (s > 0) {
-    s -= 0.3;
-    stamina.style.width = `${s}vw`;
-  } else {
-    clearInterval(drainInterval);
-    drainInterval = null;
-    bgSpeed = 0.2;
-    startBoost();
-  }
-}
+// function drainStamina() {
+//   if (s > 0) {
+//     s -= 0.3;
+//     stamina.style.width = `${s}vw`;
+//   } else {
+//     clearInterval(drainInterval);
+//     drainInterval = null;
+//     bgSpeed = 0.2;
+//     startBoost();
+//   }
+// }
 
-function boostStamina() {
-  if (s < 6) {
-    s += 0.2;
-    stamina.style.width = `${s}vw`;
-  } else {
-    clearInterval(boostInterval);
-    boostInterval = null;
-  }
-}
+// function boostStamina() {
+//   if (s < 6) {
+//     s += 0.2;
+//     stamina.style.width = `${s}vw`;
+//   } else {
+//     clearInterval(boostInterval);
+//     boostInterval = null;
+//   }
+// }
 
-function startDrain() {
-  if (drainInterval == null) {
-    drainInterval = setInterval(drainStamina, 100);
-  }
-}
+// function startDrain() {
+//   if (drainInterval == null) {
+//     drainInterval = setInterval(drainStamina, 100);
+//   }
+// }
 
-function startBoost() {
-  if (boostInterval == null) {
-    boostInterval = setInterval(boostStamina, 100);
-  }
-}
+// function startBoost() {
+//   if (boostInterval == null) {
+//     boostInterval = setInterval(boostStamina, 100);
+//   }
+// }
 
 // Sprinting
 function startSpeed(event) {
@@ -156,7 +156,7 @@ function startSpeed(event) {
     isSprinting = true;
     clearInterval(boostInterval);
     boostInterval = null;
-    startDrain();
+    // startDrain();
     bgSpeed = 1;
   }
   hasina.style.left = `5%`;
@@ -169,7 +169,7 @@ function stopSpeed(event) {
   drainInterval = null;
   bgSpeed = 0.2;
   hasina.style.left = `2%`;
-  startBoost();
+  // startBoost();
 }
 
 // Speed button events
