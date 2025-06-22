@@ -1,222 +1,187 @@
 const khaleda = document.querySelector('.khaleda');
-const stamina = document.querySelector('.stamina');
-const speedButton = document.querySelector('.speed');
-const background = document.querySelector('.background');
+const chaKhaleda = document.querySelector('.kha'); 
+const chaHasina = document.querySelector('.has');
+const fightBox = document.querySelector('.fight-box');
+const fight = document.querySelector('.fight-text');
+const time = document.querySelector('.time');
 const hasina = document.querySelector('.hasina');
-const rotateWarning = document.getElementById("rotate-warning");
+const rotate = document.querySelector('#rotate-warning');
 const jump = document.querySelector('.up-controler');
 const down = document.querySelector('.down-controler');
+const change_cha = document.querySelector('.cha-change');
+const character = document.querySelector('.character');
+const powerContainer = document.querySelector('.power-button-container');
+const mainBtn = document.querySelector('.main-power-button');
 
-const bg1 = document.querySelector('.bg1');
-const bg2 = document.querySelector('.bg2');
+mainBtn.addEventListener('click', () => {
+  powerContainer.classList.toggle('active');
+});
 
-let a = 20;
-let s = 6;
-let drainInterval = null;
-let boostInterval = null;
+
+let cha = false;
+change_cha.addEventListener("click", () => {
+    if ( cha == false){
+        character.innerHTML = `<img alt="Fight" src="khaleda2.0.png" class="character-img">`;
+        chaKhaleda.style.transform = "rotateY(180deg)";
+        chaHasina.style.transform = "rotateY(180deg)";
+        khaleda.style.left = "-12%";
+        khaleda.style.right = "60%" ;
+        hasina.style.left = "60%";
+        cha = true;
+    }
+    else{
+        character.innerHTML = `<img alt="Fight" src="hasina2.0.png" class="character-img">`;
+        chaKhaleda.style.transform = "rotateY(0deg)";
+        chaHasina.style.transform = "rotateY(0deg)";
+        khaleda.style.right = "-5%";
+        khaleda.style.left = "55%";
+        hasina.style.left = "-6%";
+        hasina.style.right = "-5%";
+        cha = false;
+    }
+});
+
+fight.addEventListener("click", () => {
+    fightBox.classList.add("fight");
+    setTimeout(() => {
+        fightBox.style.display = 'none';
+        timer();
+    }, 100);
+});
+t = 0
+function timer(){
+    let timing = setInterval(() => {
+        t += 1;
+        time.innerText = `00:0${t}`;
+        if (t >= 10){
+        time.innerText = `00:${t}`;
+        }
+        if(t == 60){
+            t = 1;
+            time.innerText = `0${t}:0${t-1}`;
+        }
+    }, 1000);
+    setTimeout(() => {
+        clearInterval(timing);
+    }, 60000);
+}
+
 let jumpAnimation = true;
 let downAnimation = true;
-let bg1X = 0;
-let bg2X = 100;
-let bgSpeed = 0.2;
-let isSprinting = false;
-let gamePaused = false;
 
-function checkOrientation() {
-  const isPortrait = window.innerHeight > window.innerWidth;
-  if (isPortrait) {
-    rotateWarning.style.display = "flex";
-    pauseGame();
-  } else {
-    rotateWarning.style.display = "none";
-    resumeGame();
-  }
-}
-
-function pauseGame() {
-  gamePaused = true;
-  bgSpeed = 0;
-  clearInterval(drainInterval);
-  clearInterval(boostInterval);
-  drainInterval = null;
-  boostInterval = null;
-}
-
-function resumeGame() {
-  gamePaused = false;
-  bgSpeed = isSprinting ? 1 : 0.2;
-  if (isSprinting && s > 0) {
-    startDrain();
-  } else {
-    startBoost();
-  }
-}
-
-window.addEventListener("load", checkOrientation);
-window.addEventListener("resize", checkOrientation);
-window.addEventListener("orientationchange", checkOrientation);
-
-// Movement
-function khaledaRun() {
-  if (!gamePaused && a >= 20 && a <= 80) {
-    a += 1.5;
-    khaleda.style.left = `${a}%`;
-  }
-}
-setInterval(khaledaRun, 100);
-
-// Jump animation
 function jumping() {
-  if (jumpAnimation === true && !gamePaused) {
-    hasina.classList.add("hasina-jump");
-    jumpAnimation = setInterval(() => {
-      hasina.classList.remove("hasina-jump");
-      clearInterval(jumpAnimation);
-      jumpAnimation = true;
-    }, 1000);
-  }
+    if (jumpAnimation === true) {
+        if(cha == true){
+            khaleda.classList.add("jump");
+            khaleda.classList.remove('breathing');
+            jumpAnimation = setInterval(jumpAgain, 1000);
+        }
+        else{
+            hasina.classList.add("jump");
+            hasina.classList.remove('breathing');
+            jumpAnimation = setInterval(jumpAgain, 1000);            
+        }
+    }
+}
+
+function jumpAgain() {
+    if ( cha == true){
+        khaleda.classList.remove("jump");
+        khaleda.classList.add('breathing');
+    }
+    else{
+        hasina.classList.remove("jump");
+        hasina.classList.add('breathing');
+    }
+    clearInterval(jumpAnimation);
+    jumpAnimation = true;
 }
 
 // Down animation
 function downing() {
-  if (downAnimation === true && !gamePaused) {
-    hasina.classList.add("hasina-down");
-    downAnimation = setInterval(() => {
-      hasina.classList.remove("hasina-down");
-      clearInterval(downAnimation);
-      downAnimation = true;
-    }, 1000);
-  }
+    if (downAnimation === true) {
+        if (cha == true){
+            // khaleda.classList.add("slide-right");
+            khaleda.classList.add('duck');
+            khaleda.classList.remove('breathing');
+        }
+        else{
+            // hasina.classList.add("slide-right");
+            hasina.classList.add('duck');
+            hasina.classList.remove('breathing');
+        }
+        
+        
+        downAnimation = setInterval(downAgain, 1000);
+    }
 }
 
-// Keyboard controls
+function downAgain() {
+    if ( cha == true){
+        // khaleda.classList.remove("slide-right");
+        khaleda.classList.remove('duck');
+        khaleda.classList.add('breathing');
+    }
+    else{
+        // hasina.classList.remove("slide-right");
+        hasina.classList.remove('duck');
+        hasina.classList.add('breathing');
+    }
+    
+    
+    clearInterval(downAnimation);
+    downAnimation = true;
+}
+
+// Keyboard control for jump/down
 document.addEventListener("keydown", function (event) {
-  if (event.key === "ArrowUp") {
-    jumping();
-  } else if (event.key === "ArrowDown") {
-    downing();
-  }
+    if (event.key === "ArrowUp") {
+        jumping();
+    } else if (event.key === "ArrowDown") {
+        downing();
+    }
 });
 
-// Background animation
-function animateBackground() {
-  if (!gamePaused) {
-    bg1X -= bgSpeed;
-    bg2X -= bgSpeed;
-
-    if (bg1X <= -100) bg1X = bg2X + 100;
-    if (bg2X <= -100) bg2X = bg1X + 100;
-
-    bg1.style.transform = `translateX(${bg1X}vw)`;
-    bg2.style.transform = `translateX(${bg2X}vw)`;
-  }
-  requestAnimationFrame(animateBackground);
-}
-animateBackground();
-
-// Stamina
-// function drainStamina() {
-//   if (s > 0) {
-//     s -= 0.3;
-//     stamina.style.width = `${s}vw`;
-//   } else {
-//     clearInterval(drainInterval);
-//     drainInterval = null;
-//     bgSpeed = 0.2;
-//     startBoost();
-//   }
-// }
-
-// function boostStamina() {
-//   if (s < 6) {
-//     s += 0.2;
-//     stamina.style.width = `${s}vw`;
-//   } else {
-//     clearInterval(boostInterval);
-//     boostInterval = null;
-//   }
-// }
-
-// function startDrain() {
-//   if (drainInterval == null) {
-//     drainInterval = setInterval(drainStamina, 100);
-//   }
-// }
-
-// function startBoost() {
-//   if (boostInterval == null) {
-//     boostInterval = setInterval(boostStamina, 100);
-//   }
-// }
-
-// Sprinting
-function startSpeed(event) {
-  event.preventDefault();
-  if (!isSprinting && s > 0 && !gamePaused) {
-    isSprinting = true;
-    clearInterval(boostInterval);
-    boostInterval = null;
-    // startDrain();
-    bgSpeed = 1;
-  }
-  hasina.style.left = `5%`;
-}
-
-function stopSpeed(event) {
-  event.preventDefault();
-  isSprinting = false;
-  clearInterval(drainInterval);
-  drainInterval = null;
-  bgSpeed = 0.2;
-  hasina.style.left = `2%`;
-  // startBoost();
-}
-
-// Speed button events
-speedButton.addEventListener('mousedown', startSpeed);
-speedButton.addEventListener('mouseup', stopSpeed);
-speedButton.addEventListener('touchstart', startSpeed);
-speedButton.addEventListener('touchend', stopSpeed);
-
-document.addEventListener('keydown', function (event) {
-  if (event.key === "ArrowRight") startSpeed(event);
-});
-document.addEventListener('keyup', function (event) {
-  if (event.key === "ArrowRight") stopSpeed(event);
-});
-
-// Jump/down buttons
-jump.addEventListener("click", jumping);
-down.addEventListener("click", downing);
+// Touch/mouse for speed button
+jump.addEventListener('mousedown', jumping);
+down.addEventListener('mousedown', downing);
 jump.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  jumping();
+    e.preventDefault();
+    jumping();
 });
 down.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  downing();
+    e.preventDefault();
+    downing();
 });
 
-// Fullscreen on double tap or double click
+
+
 function requestFullscreen() {
-  const elem = document.documentElement;
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-    elem.mozRequestFullScreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
-  }
+    const elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
 }
 
+// Double tap / double click support
 let lastTap = 0;
 window.addEventListener('touchend', function (e) {
-  const currentTime = new Date().getTime();
-  if (currentTime - lastTap < 300) {
-    requestFullscreen();
-  }
-  lastTap = currentTime;
+    const currentTime = new Date().getTime();
+    const tapLength = currentTime - lastTap;
+    if (tapLength < 300 && tapLength > 0) {
+        requestFullscreen();
+    }
+    lastTap = currentTime;
 });
-window.addEventListener('dblclick', requestFullscreen);
+
+window.addEventListener('dblclick', function () {
+    requestFullscreen();
+});
+
