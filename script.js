@@ -15,13 +15,23 @@ const player1 = document.querySelector(".woman-one");
 const player2 = document.querySelector(".woman-two");
 const dog = document.querySelector(".dog");
 const powers = document.querySelectorAll(".sub-button");
+const dogBox = document.querySelector(".dogs-box");
+const healthTwo = document.querySelector(".health-two");
+const style = window.getComputedStyle(healthTwo);
+const shield = document.querySelector(".shield");
+const dogAttack = document.querySelector(".dogs-attack");
+
+
+
 
 document.querySelector(".main-power-button").addEventListener("click", () => {
   document.querySelector(".power-button-container").classList.toggle("active");
 });
 
+// character switch catch
 let cha = false;
 
+//power
 powers.forEach(function (btn) {
   btn.addEventListener("click", () => {
      let id = btn.id;
@@ -35,8 +45,7 @@ powers.forEach(function (btn) {
         }, 4000);
       } 
       else {
-        khaleda.innerHTML = `<img alt="khaleda" src="khaGun.png" class="khaleda kha" />`;
-        khaleda.classList.remove("breathing");
+        khaleda.innerHTML = `<img alt="khaleda" src="khaGun.png" class="khaleda kha" />`; khaleda.classList.remove("breathing");
         khaleda.style.transform = 'scale(1.1)';
         setTimeout(() => {
           khaleda.innerHTML = `<img alt="khaleda" src="khaleda.webp" style="transform: rotateY(180deg)" class="khaleda kha" />`;
@@ -45,8 +54,97 @@ powers.forEach(function (btn) {
         }, 4000);
       }
     }
+    let n = -65;
+    let healthInPixStg = style.getPropertyValue("width");
+    let healthInPix = parseFloat(healthInPixStg);
+    let health = (healthInPix / window.innerWidth) * 100;
+
+    if (id == "dog") {
+        if (cha == false) {
+            dogAttack.style.backgroundImage = "url(dogAttackKha.png)";
+        }else{
+            dogAttack.style.backgroundImage = "url(dogAttackHas.png)";
+        }
+        setTimeout(() => {
+            if (cha == false) {
+                khaleda.style.display = "none";
+            }else {
+                hasina.style.display = "none";
+            }
+        }, 2000);
+        dogBox.style.left = `${n}%`;
+        dogBox.style.display = "flex";
+        for(let i = 1; i <= 18; i += 2){
+            n += i;
+            dogBox.style.left = `${n}%`;
+        }
+        setTimeout(() => {
+            dogBox.style.display = "none";
+            dogAttack.style.display = "flex";
+        }, 2000);
+        setTimeout(() => {
+            dogBox.style.left = "-65%";
+            dogBox.style.display = "flex";
+            healthTwo.style.width = `${health - 4}vw`;
+            dogAttack.style.display = "none";
+            hasina.style.display = "flex";
+            khaleda.style.display = "flex";
+        }, 4000);
+    }
   });
 });
+
+
+// shield controler
+shield.addEventListener("mousedown", () => {
+    if (cha == false) {
+        khaleda.innerHTML = `<img alt="khaleda" src="khaShd.png" class="khaleda kha" style="transform: rotateY(180deg)"/>`;
+        khaleda.classList.remove("breathing");
+        
+    }
+    else{
+        hasina.innerHTML = `<img alt="hasina" src="hasShd.png" class="hasina has" style="transform: rotateY(180deg)"/>`;
+        hasina.classList.remove("breathing");
+    }
+    
+});
+shield.addEventListener("mouseup", () => {
+    if (cha == false) {
+        khaleda.innerHTML = `<img alt="khaleda" src="khaleda.webp" class="khaleda kha" />`;
+        khaleda.classList.add("breathing");
+    }
+    else{
+        hasina.innerHTML = `<img alt="hasina" src="hasina.webp" class="hasina has"/>`;
+        hasina.classList.add("breathing");
+    }
+    
+});
+//touch
+shield.addEventListener("touchstart", () => {
+    if (cha == false) {
+        khaleda.innerHTML = `<img alt="khaleda" src="khaShd.png" class="khaleda kha" style="transform: rotateY(180deg)"/>`;
+        khaleda.classList.remove("breathing");
+        khaleda.style.transform = "scaleY(1.1)";
+    }
+    else{
+        hasina.innerHTML = `<img alt="hasina" src="hasShd.png" class="hasina has" style="transform: rotateY(180deg)"/>`;
+        hasina.classList.remove("breathing");
+    }
+    
+});
+shield.addEventListener("touchend", () => {
+    if (cha == false) {
+        khaleda.innerHTML = `<img alt="khaleda" src="khaleda.webp" class="khaleda kha" style="transform: rotateY(180deg)"/>`;
+        khaleda.classList.add("breathing");
+    }
+    else{
+        hasina.innerHTML = `<img alt="hasina" src="hasina.webp" class="hasina has" style="transform: rotateY(180deg)"/>`;
+        hasina.classList.add("breathing");
+    }
+    
+});
+
+
 change_cha.addEventListener("click", () => {
   if (cha == false) {
     character.innerHTML = `<img alt="Fight" src="khaleda2.0.webp" class="character-img">`;
