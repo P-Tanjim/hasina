@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fear me Khaleda</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- start button -->
+    <div class="fight-box">
+      <div class="character">
+        <img alt="Fight" src="hasina2.0.webp" class="character-img" />
+      </div>
+      <div class="fight-text-box">
+        <button class="fight-text"></button>
+        <button class="cha-change"></button>
+      </div>
+    </div>
+
+    <!-- rotate warning -->
+    <div id="rotate-warning">
+      <img src="rotate.webp" alt="Please rotate your device" class="rotate-img"/>
+      <img src="dbl-tap.png" alt="Double Tap to fullscreen" class="dbl-tap-img">
+    </div>
+
+    <!-- health -->
+    <div class="health">
+      <div class="woman-one"></div>
+      <div class="woman-two"></div>
+      <div class="health-one"></div>
+      <div class="health-two"></div>
+    </div>
+
+    <!-- timer -->
+    <div class="timer">
+      <h2 class="time">01:00</h2>
+    </div>
+
+    <!-- controler -->
+    <div class="up-down">
+      <button class="up-controler">
+        <img alt="up-controler" src="up.webp" class="up" />
+      </button>
+      <button class="down-controler">
+        <img alt="down-controler" src="down.webp" class="down" />
+      </button>
+    </div>
+
+    <!-- image showing -->
+    <div class="img-box">
+      <div class="sign-board">
+        <img alt="sign-board" src="imgShow.png" class="sign-board-img" />
+      </div>
+      <div class="imgs">
+        <img alt="image" src="nirImg.png" class="img" />
+      </div>
+    </div>
+
+    <!-- Powers button -->
+    <div class="power-button-container">
+      <button class="main-power-button" id="mainPowerButton"></button>
+
+      <button class="sub-button btn-top" id="dog">
+        <svg class="progress-ring" width="55" height="55">
+          <circle class="progress-ring__circle" r="25.5" cx="27.5" cy="27.5" />
+        </svg>
+      </button>
+
+      <button class="sub-button btn-bottom" id="heli">
+        <svg class="progress-ring" width="55" height="55">
+          <circle class="progress-ring__circle" r="25.5" cx="27.5" cy="27.5" />
+        </svg>
+      </button>
+
+      <button class="sub-button btn-left" id="police">
+        <svg class="progress-ring" width="55" height="55">
+          <circle class="progress-ring__circle" r="25.5" cx="27.5" cy="27.5" />
+        </svg>
+      </button>
+
+      <button class="sub-button btn-right" id="gun">
+        <svg class="progress-ring" width="55" height="55">
+          <circle class="progress-ring__circle" r="25.5" cx="27.5" cy="27.5" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="shield"><i class="fa-solid fa-shield"></i></div>
+
+    <!-- dogs attack -->
+    <div class="dogs-box">
+      <img src="dogsONE.png" alt="Enemy Dog" />
+    </div>
+
+    <div class="dogs-attack">
+      <img src="dogAttackKha.png" alt="Dog Attack" id="dogAttackEnemy" />
+    </div>
+
+    <div class="dogs-box-ene">
+      <img src="dogsONE.png" alt="Enemy Dog" />
+    </div>
+
+    <div class="dogs-attack-ene">
+      <img src="dogAttackKha.png" alt="Dog Attack" id="dogAttackPlayer" />
+    </div>
+
+    <!-- helicopter attack-->
+    <div class="heli" id="heli">
+      <div class="heli-bullet">
+        <img src="bullet.png" alt="bullet" class="bullet-img" />
+      </div>
+    </div>
+    <div class="heliEne" id="heliEne">
+      <div class="heli-bullet-ene">
+        <img src="bullet.png" alt="bullet" class="bullet-img" />
+      </div>
+    </div>
+
+    <!-- police attack -->
+    <div class="police-box">
+      <img src="police-car.png" alt="police car" class="policeCar" />
+    </div>
+    <div class="police-box-ene">
+      <img src="police-car.png" alt="police car" class="policeCar-ene" />
+    </div>
+
+    <!-- bullets  -->
+    <div class="bullet">
+      <img src="bullet.png" alt="bullet" class="bullet-img" />
+    </div>
+    <div class="bullet-ene">
+      <img src="bullet.png" alt="bullet" class="bullet-img" />
+    </div>
+
+    <!-- resume and exit  -->
+     <button class="pause">
+      <!-- <img src="pause.png" alt="pause game"> -->
+     </button>
+     <div class="resume-box">
+      <div class="image-box">
+        <!-- <img src="resume.png" alt="resume game">
+        <img src="exit.png" alt="exit game"> -->
+        <button id="resume" class="stop"></button>
+        <button id="exit" class="stop"></button>
+      </div>
+     </div>
+
+    <!-- background image -->
+    <div class="background-box">
+      <div class="background">
+        <!-- <img alt="background-image" class="bgimg" src="bg.avif" /> -->
+      </div>
+
+      <!-- ground -->
+      <div class="ground-box">
+        <div class="ground"></div>
+      </div>
+    </div>
+
+    <!-- People -->
+    <div class="people">
+      <div class="khaleda breathing">
+        <img alt="khaleda" src="khaleda.webp" class="khaleda kha" />
+      </div>
+
+      <div class="hasina breathing">
+        <img alt="hasina" src="hasina.webp" class="hasina has" />
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
