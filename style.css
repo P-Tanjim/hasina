@@ -1,0 +1,1034 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+#rotate-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#rotate-warning img {
+  max-width: 90%;
+  height: auto;
+}
+
+.rotate-img{
+  animation: rotate 2s linear infinite;
+}
+
+.dbl-tap-img{
+  height: 40%;
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  display: flex;
+}
+
+.dbl-tap{
+  animation: dblTap 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  0%{
+    transform: scale(1) rotate(0deg);
+  }
+  100%{
+    transform: scale(1.2) rotate(120deg);
+  }
+  /* 100%{
+    transform: scale(1) rotate(0deg);
+  } */
+}
+
+@keyframes dblTap {
+  0%{
+    transform: scale(1);
+  }
+  100%{
+    transform: scale(1.2);
+  }
+}
+
+@media (max-width: 400px) {
+  #rotate-warning {
+    display: flex;
+  }
+}
+
+/* start button */
+.fight-box {
+  height: 100%;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+.fight-text-box {
+  position: absolute;
+  height: 60%;
+  width: 50%;
+  right: 0%;
+  top: 25%;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5vh;
+}
+.fight-text {
+  height: 30%;
+  width: 40%;
+  border: none;
+  background-image: url(fighttext.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.cha-change {
+  height: 40%;
+  width: 50%;
+  border: none;
+  background-image: url(cha-change.webp);
+  background-size: contain;
+  background-color: transparent;
+  background-repeat: no-repeat;
+}
+
+.fight-text:hover {
+  transform: scale(1.2);
+  transition: transform 0.1s linear;
+}
+
+.cha-change:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+}
+
+.character {
+  height: 90%;
+  width: 50%;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 4%;
+  top: 10%;
+  pointer-events: none;
+  user-select: none;
+}
+.character-img {
+  height: 100%;
+  width: 60%;
+}
+
+/* fight start */
+.fight {
+  animation: fight 0.1s linear;
+}
+
+@keyframes fight {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* image box */
+.img-box {
+  height: 30vh;
+  width: 20vw;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 100;
+  pointer-events: none;
+  user-select: none;
+  object-fit: fill;
+}
+
+.sign-board {
+  height: 100%;
+  width: 100%;
+}
+
+.sign-board img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  transform: translate(-50%, 0%);
+}
+
+.imgs {
+  height: 30%;
+  width: 30%;
+}
+
+.imgs img {
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+  position: absolute;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Background */
+.background {
+  width: 100vw;
+  height: 120vh;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  top: -50%;
+  left: 0;
+  z-index: 1;
+  background-image: url(bg.avif);
+  background-size: cover;
+}
+
+/* Ground */
+.ground-box {
+  position: absolute;
+  bottom: 0%;
+  left: 0%;
+  width: 110vw;
+  z-index: 1;
+}
+
+.ground {
+  height: 30vh;
+  width: 100%;
+  background-image: url(ground.png);
+  background-size: contain;
+}
+
+.people {
+  height: 100%;
+  width: 100%;
+}
+
+.khaleda {
+  height: 50vh;
+  width: 50vw;
+  object-fit: contain;
+  position: absolute;
+  bottom: 7%;
+  right: -5%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+.hasina {
+  height: 50vh;
+  width: 50vw;
+  object-fit: contain;
+  position: absolute;
+  bottom: 7%;
+  left: -5%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 4;
+}
+
+.jump {
+  animation: jump 1s linear;
+}
+
+.duck {
+  transform: translateY(10%) scaleY(0.8);
+  animation: duckAnimation 1s linear;
+}
+
+.breathing {
+  animation: breath 1s linear infinite;
+}
+
+.slide-right {
+  animation: down 1s linear 1;
+}
+
+@keyframes breath {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.99);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes duckAnimation {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  10% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  30% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  40% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  50% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  70% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  80% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  90% {
+    transform: translateY(10%) scaleY(0.8);
+  }
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes down {
+  0% {
+    left: -5%;
+    bottom: 7%;
+  }
+  20% {
+    bottom: 2%;
+  }
+  50% {
+    left: 0%;
+    bottom: 0%;
+  }
+  100% {
+    left: -5%;
+    bottom: 7%;
+  }
+}
+
+@keyframes jump {
+  0% {
+    bottom: 7%;
+    transform: scale(1);
+  }
+  50% {
+    bottom: 45%;
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scale(1);
+    bottom: 7%;
+  }
+}
+
+.up-down {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  height: 15vh;
+  width: 9vw;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+  z-index: 90;
+}
+
+.up-controler,
+.down-controler {
+  border: none;
+  background-color: transparent;
+  outline: none;
+}
+
+.up,
+.down {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ------timer----- */
+
+.timer {
+  height: 10vh;
+  width: 20vw;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 5%;
+  left: 40%;
+}
+.timer h2 {
+  font-size: 4vw;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Power Button Container */
+.power-button-container {
+  position: absolute; /* Changed to absolute as per your CSS */
+  bottom: 23vh;
+  left: 11vw;
+  width: 60px; /* Main button size */
+  height: 60px; /* Main button size */
+  z-index: 101;
+  /* Flexbox to center the main button within its own container */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Power Button */
+.main-power-button {
+  width: 60px; /* Adjusted to 60px based on your second snippet */
+  height: 60px; /* Adjusted to 60px based on your second snippet */
+  border-radius: 50%;
+  /* Using a placeholder image for 'power.webp' */
+  background-image: url(power.webp);
+  background-size: contain;
+  background-position: center;
+  transform: rotateY(180deg); /* As per your CSS */
+  border: none;
+  position: relative; /* Needed for z-index */
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.2s ease-in-out; /* Added transition for hover effect */
+  outline: none;
+}
+
+.main-power-button:hover {
+  transform: scale(1.05) rotateY(180deg); /* Scale and maintain rotation */
+}
+
+.main-power-button:active {
+  transform: scale(0.98) rotateY(180deg);
+}
+
+/* Sub-buttons */
+.sub-button {
+  width: 55px; /* As per your CSS */
+  height: 55px; /* As per your CSS */
+  border-radius: 50%;
+  position: absolute;
+  top: 5px; /* As per your CSS, relative to .power-button-container */
+  left: 5px; /* As per your CSS, relative to .power-button-container */
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s ease; /* For initial appearance animation */
+  z-index: 1; /* Below the main button when not active */
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden; /* CRITICAL: Changed from 'visible' to 'hidden' to clip SVG */
+  border: none; /* Ensure no default border */
+  display: flex; /* To center content (like emojis) */
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem; /* For emoji/content size */
+  color: #2d3748; /* Dark text for icons/labels */
+}
+
+/* Visual style for disabled buttons */
+.sub-button:disabled {
+  /* opacity: 0.6; Dim the button */
+  cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+  box-shadow: none; /* Remove shadow when disabled */
+}
+
+/* Active state for sub-buttons (for animation) */
+.power-button-container.active .btn-top {
+  transform: translateY(-80px) rotate(360deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.power-button-container.active .btn-bottom {
+  transform: translateY(80px) rotate(360deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.power-button-container.active .btn-left {
+  transform: translateX(-80px) rotate(360deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.power-button-container.active .btn-right {
+  transform: translateX(80px) rotate(360deg);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* SVG Progress Ring */
+.progress-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make SVG cover the button */
+  height: 100%; /* Make SVG cover the button */
+  transform: rotate(-90deg); /* Start the stroke from the top (12 o'clock) */
+  pointer-events: none; /* Ensure pointer events don't interfere with button clicks */
+}
+
+.progress-ring__circle {
+  fill: none; /* No fill for the circle */
+  stroke: #38ff1e; /* Blue color for the progress stroke */
+  stroke-width: 4; /* Width of the progress line */
+  /*
+             * stroke-dasharray will be set by JS to the circumference.
+             * stroke-dashoffset will be controlled by JS for animation:
+             * 0 = fully filled, circumference = fully empty.
+             */
+  transition: stroke-dashoffset 0.3s linear; /* Default transition for smoothness */
+}
+
+/* Add button background images (using placeholders) */
+.btn-top {
+  background-image: url(dog.png);
+}
+.btn-bottom {
+  background-image: url(heli.png);
+}
+.btn-left {
+  background-image: url(police.png);
+}
+.btn-right {
+  background-image: url(gun.png);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  /* Adjusted container size for smaller screens */
+  .power-button-container {
+    width: 180px;
+    height: 180px;
+    bottom: 15vh; /* Adjust vertical position for smaller screens */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+  }
+  .main-power-button {
+    width: 100px;
+    height: 100px;
+  }
+  .sub-button {
+    width: 50px;
+    height: 50px;
+    font-size: 1rem;
+  }
+  /* Adjust SVG size for smaller buttons */
+  .progress-ring {
+    width: 50px;
+    height: 50px;
+  }
+  .progress-ring__circle {
+    r: 23; /* Adjust radius for 50px button size (25px radius - 2px stroke-width) */
+    cx: 25;
+    cy: 25;
+  }
+  /* Adjust sub-button animation for smaller screens */
+  .power-button-container.active .btn-top {
+    transform: translateY(-70px) rotate(360deg);
+  }
+  .power-button-container.active .btn-bottom {
+    transform: translateY(70px) rotate(360deg);
+  }
+  .power-button-container.active .btn-left {
+    transform: translateX(-70px) rotate(360deg);
+  }
+  .power-button-container.active .btn-right {
+    transform: translateX(70px) rotate(360deg);
+  }
+}
+
+@media (max-width: 400px) {
+  .main-power-button {
+    width: 45px;
+    height: 45px;
+  }
+  .sub-button {
+    width: 40px;
+    height: 40px;
+  }
+  /* Adjust SVG size for even smaller buttons */
+  .progress-ring {
+    width: 40px;
+    height: 40px;
+  }
+  .progress-ring__circle {
+    r: 18; /* Adjust radius for 40px button size (20px radius - 2px stroke-width) */
+    cx: 20;
+    cy: 20;
+  }
+  /* Further adjust sub-button animation for very small screens */
+  .power-button-container.active .btn-top {
+    transform: translateY(-50px) rotate(360deg);
+  }
+  .power-button-container.active .btn-bottom {
+    transform: translateY(50px) rotate(360deg);
+  }
+  .power-button-container.active .btn-left {
+    transform: translateX(-50px) rotate(360deg);
+  }
+  .power-button-container.active .btn-right {
+    transform: translateX(50px) rotate(360deg);
+  }
+}
+
+/*sheild controler*/
+.shield {
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  top: 65%;
+  right: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 90;
+}
+.shield i {
+  transform: scale(3.9);
+}
+
+/* heath bar */
+.health {
+  height: 5vh;
+  width: 100vw;
+  position: absolute;
+  top: 8vh;
+  left: 0vw;
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 25vw;
+}
+
+.health-one,
+.health-two {
+  height: 2vh;
+  width: 25vw;
+  border-radius: 20px;
+  background-color: rgb(255, 30, 30);
+  position: absolute;
+  transition: width 0.2s linear;
+}
+
+.health-one {
+  left: 8.5vw;
+}
+
+.health-two {
+  left: 71vw;
+}
+
+.woman-one,
+.woman-two {
+  height: 6vh;
+  width: 3vw;
+  position: absolute;
+}
+.woman-one {
+  left: 6.5vw;
+  background-image: url(hasina2.0.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.woman-two {
+  right: 28vw;
+  background-image: url(khaleda2.0.webp);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* dog power */
+.dogs-box {
+  height: 65vh;
+  width: 55vw;
+  position: absolute;
+  bottom: 7%;
+  left: -65%;
+  z-index: 100;
+  transition: left 2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* or 'cover' if you want it to fill without stretching */
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-attack {
+  height: 65vh;
+  width: 50vw;
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  z-index: 80;
+  transition: left 2s linear;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-attack img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-box-ene {
+  height: 65vh;
+  width: 55vw;
+  position: absolute;
+  bottom: 7%;
+  left: 105%;
+  z-index: 80;
+  transition: left 2s linear;
+  display: flex;
+  transform: rotateY(180deg);
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-box-ene img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* or 'cover' if you want it to fill without stretching */
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-attack-ene {
+  height: 65vh;
+  width: 50vw;
+  position: absolute;
+  bottom: 7%;
+  left: -10%;
+  z-index: 80;
+  transition: left 2s linear;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.dogs-attack-ene img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heli {
+  height: 35vh;
+  width: 35vw;
+  background-image: url(heliAttack.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 73%;
+  left: -40%;
+  transform: rotate(10deg);
+  z-index: 100;
+  transition: left 3s ease-out;
+  display: flex;
+}
+.heliEne {
+  height: 35vh;
+  width: 35vw;
+  background-image: url(heliAttack.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 73%;
+  left: 105%;
+  z-index: 100;
+  transform: rotateY(180deg) rotate(10deg);
+  transition: left 3s linear;
+  display: none;
+}
+
+.police-box {
+  height: 55vh;
+  width: 45vw;
+  position: absolute;
+  bottom: 4%;
+  left: -45%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+  transition: left 2s linear;
+}
+.police-box img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.police-box-ene {
+  height: 55vh;
+  width: 45vw;
+  position: absolute;
+  bottom: 4%;
+  left: 110%;
+  pointer-events: none;
+  user-select: none;
+  z-index: 3;
+  transform: rotateY(180deg);
+  transition: left 2s linear;
+}
+.police-box-ene img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+/* bullet animation  */
+.bullet {
+  height: 3vh;
+  width: 3vw;
+  position: absolute;
+  top: 53.5%;
+  left: 25%;
+  z-index: 3;
+  display: none;
+  animation: bullet 0.2s linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bullet-ene {
+  height: 3vh;
+  width: 3vw;
+  position: absolute;
+  top: 50%;
+  left: 72%;
+  z-index: 3;
+  transform: rotateY(180deg);
+  display: none;
+  animation: bullet-ene 0.2s linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bullet-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.heli-bullet {
+  height: 3vh;
+  width: 3vw;
+  position: absolute;
+  top: 70%;
+  left: 85%;
+  transform: rotate(10deg);
+  animation: heliBullet 0.1s linear infinite;
+  display: none;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heli-bullet-ene {
+  height: 3vh;
+  width: 3vw;
+  position: absolute;
+  top: 70%;
+  left: 0%;
+  transform: rotate(10deg);
+  animation: heliBullet 0.1s linear infinite;
+  display: flex;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes bullet {
+  0% {
+    left: 25%;
+  }
+  100% {
+    left: 80%;
+  }
+}
+
+@keyframes bullet-ene {
+  0% {
+    left: 72%;
+  }
+  100% {
+    left: 15%;
+  }
+}
+
+@keyframes heliBullet {
+  0% {
+    left: 85%;
+    top: 70%;
+  }
+  100% {
+    left: 280%;
+    top: 200%;
+  }
+}
+
+
+/* resume and exit */
+.pause{
+  height: 7vh;
+  width: 7vh;
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  z-index: 100;
+  background-image: url(pause.png);
+  background-size: contain;
+  background-color: transparent;
+  border: none;
+}
+/* .pause img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+} */
+
+.resume-box{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  z-index: 110;
+}
+
+.image-box{
+  height: 50%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.image-box button{
+  border: none;
+  background: transparent;
+}
+
+#resume{
+  height: 60%;
+  width: 30%;
+  background-image: url(resume.png); 
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#exit{
+  height: 80%;
+  width: 80%;
+  background-image: url(exit.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.image-box button:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+}
+
+.pause:hover {
+  transform: scale(1.1);
+  transition: transform 0.1s linear;
+}
